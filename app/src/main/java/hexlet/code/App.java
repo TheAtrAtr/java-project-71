@@ -1,11 +1,13 @@
 package hexlet.code;
 
+
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 
@@ -13,10 +15,10 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 class App implements Callable {
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    File file1;
+    public static String file1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    File file2;
+    public static String file2;
 
     @Option(names = {"-h", "--help"}, usageHelp = true,
             description = "Show this help message and exit.")
@@ -26,7 +28,7 @@ class App implements Callable {
             description = "Print version information and exit.")
     boolean versionHelpRequested;
 
-    @Option(names = { "-f", "--format" }, paramLabel = "format", description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
     File archive;
 
 
@@ -35,7 +37,12 @@ class App implements Callable {
     }
 
     @Override
-    public Object call() throws Exception {
+    public Object call() throws IOException {
+        System.out.println(Differ.generate());
         return null;
     }
 }
+
+
+
+
