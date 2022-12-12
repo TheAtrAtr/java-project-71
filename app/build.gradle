@@ -30,3 +30,20 @@ application {
 compileJava {
     options.release = 17
 }
+
+jacoco {
+    applyTo run
+}
+
+tasks.register('applicationCodeCoverageReport', JacocoReport) {
+    executionData run
+    sourceSets sourceSets.main
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
