@@ -16,5 +16,5 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: check
+          arguments: test
           build-root-directory: app
