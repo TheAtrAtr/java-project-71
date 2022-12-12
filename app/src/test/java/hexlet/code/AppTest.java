@@ -25,9 +25,7 @@ public class AppTest {
         String path2 = "src/test/resources/2.txt";
         File file2 = new File(path2);
         String absolutePath2 = file2.getAbsolutePath();
-
         String diff2 = Differ.generate(absolutePath1, absolutePath2);
-        System.out.println(diff2);
         assertEquals(diff, diff2);
     }
 }
