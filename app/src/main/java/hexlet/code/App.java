@@ -38,7 +38,7 @@ class App implements Callable {
 
     @Override
     public Object call() throws IOException {
-        System.out.println(Differ.generate());
+        System.out.println(Differ.generate(file1, file2));
         return null;
     }
 }

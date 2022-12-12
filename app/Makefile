@@ -1,2 +1,2 @@
 run-dist:
-	./build/install/app/bin/app /mnt/c/Users/MaksimUA/Desktop/3/1.txt /mnt/c/Users/MaksimUA/Desktop/3/2.txt
+	./build/install/app/bin/app /mnt/c/jva/java-project-71/app/src/test/resources/1.txt /mnt/c/jva/java-project-71/app/src/test/resources/2.txt
