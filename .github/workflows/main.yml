@@ -15,18 +15,17 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
           build-root-directory: app
 
-#      - name: Publish code coverage
-#        uses: paambaati/codeclimate-action@v3.1.0
-#        env:
-#          CC_TEST_REPORTER_ID: 335a332c82ea1f4dc5b7b97fbaba3c9ad3c05b8e780f2cea35294480888a1a31
-#          JACOCO_SOURCE_PATH: app/src/main/java
-#        with:
-#          coverageCommand: make report
-#          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v3.1.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          JACOCO_SOURCE_PATH: app/src/main/java
+        with:
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco

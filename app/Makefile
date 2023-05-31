@@ -1,40 +1,24 @@
-run-dist:
-	./build/install/app/bin/app src/test/resources/1.txt src/test/resources/2.txt
-#/mnt/c/jva/java-project-71/app/src/test/resources/1.txt /mnt/c/jva/java-project-71/app/src/test/resources/2.txt
+run0:
+	./build/install/app/bin/app -h
+run1:
+	./build/install/app/bin/app src/test/resources/1.json src/test/resources/2.json
 
-#.DEFAULT_GOAL := build-run
-#
-#clean:
-#	make -C app clean
-#
+run2:
+	./build/install/app/bin/app -f plain src/test/resources/1.json src/test/resources/2.json
+
+run3:
+	./build/install/app/bin/app -f json src/test/resources/1.json src/test/resources/2.json
+
+run4:
+	./build/install/app/bin/app src/test/resources/1.yml src/test/resources/2.yml
+
+run5:
+	./build/install/app/bin/app -f plain src/test/resources/1.yml src/test/resources/2.yml
+
+run6:
+	./build/install/app/bin/app -f json src/test/resources/1.yml src/test/resources/2.yml
+
 build:
-	./gradlew checkstyleMain
 	./gradlew build
-#build:
-#	./gradlew clean build
-#
-#install:
-#	make -C app install
-#
-#run-dist:
-#	make -C run-dist
-#
-#run:
-#	make -C app run
-#
-#test:
-#	make -C app test
-#
-#report:
-#	make -C app report
-#
-#lint:
-#	make -C app lint
-#
-#update-deps:
-#	make -C app update-deps
-#
-#
-#build-run: build run
-#
+
 .PHONY: build

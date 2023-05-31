@@ -28,8 +28,8 @@ class App implements Callable {
             description = "Print version information and exit.")
     boolean versionHelpRequested;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
-    File archive;
+    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]", defaultValue = "stylish")
+    public String format;
 
 
     public static void main(String... args) {
@@ -38,7 +38,7 @@ class App implements Callable {
 
     @Override
     public Object call() throws IOException {
-        System.out.println(Differ.generate(file1, file2));
+        System.out.println(Differ.generate(file1, file2, format));
         return null;
     }
 }
