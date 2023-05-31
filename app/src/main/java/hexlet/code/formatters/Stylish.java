@@ -11,7 +11,7 @@ public class Stylish {
         StringBuilder builder = new StringBuilder("{\n");
         for (var key : keys) {
             for (var e : resultMapValue.get(key).entrySet()) {
-                builder.append(e.getKey()).append(" ").append(key).append(e.getValue()).append("\n");
+                builder.append("  ").append(e.getKey()).append(" ").append(key).append(e.getValue()).append("\n");
             }
         }
         builder.append("}");
