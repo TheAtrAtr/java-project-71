@@ -5,8 +5,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
@@ -28,7 +26,8 @@ class App implements Callable {
             description = "Print version information and exit.")
     boolean versionHelpRequested;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]", defaultValue = "stylish")
+    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]",
+            defaultValue = "stylish")
     public String format;
 
 

@@ -1,20 +1,19 @@
 package hexlet.code.formatters;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.List;
+import java.util.TreeSet;
 
 public class Plain {
-    private static final String updated = "' was updated. From ";
-    private static final String removed = "' was removed";
-    private static final String added = "' was added with value: ";
-    private static final String complex = "[complex value]";
-    private static final List<String> listWordsWithoutMark = List.of("true", "false", "null");
+    private static final String UPDATED = "' was updated. From ";
+    private static final String REMOVED = "' was removed";
+    private static final String ADDED = "' was added with value: ";
+    private static final String COMPLEX = "[complex value]";
+    private static final List<String> LIST_WORDS_WITHOUT_MARK = List.of("true", "false", "null");
 
     public static String format(Map<String, Map<String, String>> resultMapValue) throws JsonProcessingException {
         Set<String> keys = new TreeSet<>();
@@ -24,44 +23,51 @@ public class Plain {
         for (var key : keys) {
             for (var e : resultMapValue.get(key).entrySet()) {
                 String value;
-                String value_before;
-                String value_after;
+                String valueBefore;
+                String valueAfter;
                 if (e.getKey().equals(" ")) {
                     break;
                 } else if (e.getKey().equals("+")) {
 
                     if (e.getValue().contains("[") || e.getValue().contains("{")) {
-                        value = complex;
+                        value = COMPLEX;
                     } else {
                         String v = e.getValue().replace(":", "").trim();
-                        if (StringUtils.isNumeric(v) || listWordsWithoutMark.contains(v))
+                        if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
                             value = v;
-                        else value = "'" + v + "'";
+                        } else {
+                            value = "'" + v + "'";
+                        }
                     }
-                    builder.append("Property '").append(key).append(added).append(value).append("\n");
+                    builder.append("Property '").append(key).append(ADDED).append(value).append("\n");
                 } else {
                     if (resultMapValue.get(key).size() > 1) {
-                        if (resultMapValue.get(key).get("-").contains("[") || resultMapValue.get(key).get("-").contains("]")) {
-                            value_before = complex + " to";
+                        if (resultMapValue.get(key).get("-").contains("[") || resultMapValue.get(key).get("-")
+                                .contains("]")) {
+                            valueBefore = COMPLEX + " to";
                         } else {
                             String v = (resultMapValue.get(key).get("-")).replace(":", "").trim();
-                            if (StringUtils.isNumeric(v) || listWordsWithoutMark.contains(v))
-                                value_before = v + " to";
-                            else
-                                value_before = "'" + v + "' to";
+                            if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
+                                valueBefore = v + " to";
+                            } else {
+                                valueBefore = "'" + v + "' to";
+                            }
                         }
-                        if (resultMapValue.get(key).get("+").contains("[") || resultMapValue.get(key).get("+").contains("]")) {
-                            value_after = " " + complex;
+                        if (resultMapValue.get(key).get("+").contains("[") || resultMapValue.get(key).get("+")
+                                .contains("]")) {
+                            valueAfter = " " + COMPLEX;
                         } else {
                             String v = (resultMapValue.get(key).get("+")).replace(":", "").trim();
-                            if (StringUtils.isNumeric(v) || listWordsWithoutMark.contains(v))
-                                value_after = " " + v;
-                            else
-                                value_after = " '" + v + "'";
+                            if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
+                                valueAfter = " " + v;
+                            } else {
+                                valueAfter = " '" + v + "'";
+                            }
                         }
-                        builder.append("Property '").append(key).append(updated).append(value_before).append(value_after).append("\n");
+                        builder.append("Property '").append(key).append(UPDATED).append(valueBefore).append(valueAfter)
+                                .append("\n");
                     } else if (resultMapValue.get(key).size() == 1) {
-                        builder.append("Property '").append(key).append(removed).append("\n");
+                        builder.append("Property '").append(key).append(REMOVED).append("\n");
                     }
                     break;
                 }

@@ -92,7 +92,7 @@ public class AppTest {
     }
 
     @Test
-    public void testYmlToSylish() throws IOException {
+    public void testYmlToSylish() throws Exception {
         String diff = """
                 {
                 - follow: false
@@ -109,7 +109,7 @@ public class AppTest {
         String path2 = "src/test/resources/2.yml";
         File file2 = new File(path2);
         String absolutePath2 = file2.getAbsolutePath();
-        String diff2 = Differ.generate(absolutePath1, absolutePath2, "stylish");
+        String diff2 = Differ.generate(absolutePath1, absolutePath2);
         assertEquals(diff, diff2);
     }
 

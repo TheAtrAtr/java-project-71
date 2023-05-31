@@ -13,7 +13,9 @@ public class Formatter {
             return Plain.format(diff);
         } else if (form.equals("json")) {
             return Json.format(diff);
-        } else return Stylish.format(diff);
+        } else {
+            return Stylish.format(diff);
+        }
     }
 
 }

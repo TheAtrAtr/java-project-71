@@ -5,11 +5,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.TreeSet;
-import java.util.Set;
 
 public class Differ {
-    static String generate(String f1, String f2, String format) throws IOException {
+    public static String generate(String f1, String f2, String format) throws IOException {
         Map<String, String> file1 = Parser.getMap(f1);
         Map<String, String> file2 = Parser.getMap(f2);
         Map<String, Map<String, String>> resultMapValue = new TreeMap<>();
@@ -42,6 +40,11 @@ public class Differ {
             }
         }
         return Formatter.format(resultMapValue, format);
+    }
+
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        String format = "stylish";
+        return generate(filePath1, filePath2, format);
     }
 }
 
