@@ -1,27 +1,33 @@
-run0:
-	./build/install/app/bin/app -h
-run1:
-	./build/install/app/bin/app src/test/resources/1.json src/test/resources/2.json
+.DEFAULT_GOAL := build-run
 
-run2:
-	./build/install/app/bin/app -f plain src/test/resources/1.json src/test/resources/2.json
-
-run3:
-	./build/install/app/bin/app -f json src/test/resources/1.json src/test/resources/2.json
-
-run4:
-	./build/install/app/bin/app src/test/resources/1.yml src/test/resources/2.yml
-
-run5:
-	./build/install/app/bin/app -f plain src/test/resources/1.yml src/test/resources/2.yml
-
-run6:
-	./build/install/app/bin/app -f json src/test/resources/1.yml src/test/resources/2.yml
+clean:
+	./gradlew clean
 
 build:
-	./gradlew build
+	./gradlew clean build
+
+install:
+	./gradlew clean install
+
+run-dist:
+	./build/install/java-package/bin/java-package
+
+run:
+	./gradlew run
+
+test:
+	./gradlew test
 
 report:
-	./gradlew jacocoTestReport --warning-mode all
+	./gradlew jacocoTestReport
+
+lint:
+	./gradlew checkstyleMain checkstyleTest
+
+update-deps:
+	./gradlew useLatestVersions
+
+
+build-run: build run
 
 .PHONY: build
