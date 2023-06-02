@@ -9,12 +9,15 @@ import java.util.Map;
 
 public class Formatter {
     static String format(Map<String, Map<String, String>> diff, String form) throws JsonProcessingException {
-        if (form.equals("plain")) {
-            return Plain.format(diff);
-        } else if (form.equals("json")) {
-            return Json.format(diff);
-        } else {
-            return Stylish.format(diff);
+        switch (form) {
+            case ("plain"):
+                return Plain.format(diff);
+            case ("json"):
+                return Json.format(diff);
+            case ("stylish"):
+                return Stylish.format(diff);
+            default:
+                throw new RuntimeException("Формат " + form + " не поддерживается");
         }
     }
 

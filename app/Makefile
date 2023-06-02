@@ -21,4 +21,7 @@ run6:
 build:
 	./gradlew build
 
+report:
+	./gradlew jacocoTestReport --warning-mode all
+
 .PHONY: build

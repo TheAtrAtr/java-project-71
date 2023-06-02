@@ -4,23 +4,22 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
-    static Map<String, String> getMap(String path) throws IOException {
+    static Map<String, String> parse(String fileName, String body) throws IOException {
         ObjectMapper jsonMapper = new ObjectMapper();
         ObjectMapper yamlMapper = new YAMLMapper();
         Map<String, Object> x;
         Map<String, String> y = new HashMap<>();
-        if (path.endsWith("json")) {
-            x = jsonMapper.readValue(new File(path), new TypeReference<>() {
+        if (fileName.endsWith("json")) {
+            x = jsonMapper.readValue(body, new TypeReference<>() {
             });
 
         } else {
-            x = yamlMapper.readValue(new File(path), new TypeReference<>() {
+            x = yamlMapper.readValue(body, new TypeReference<>() {
             });
         }
         for (var entry : x.entrySet()) {
@@ -29,6 +28,5 @@ public class Parser {
             y.put(key, value);
         }
         return y;
-
     }
 }

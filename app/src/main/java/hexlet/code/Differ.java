@@ -1,6 +1,8 @@
 package hexlet.code;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.HashMap;
@@ -8,8 +10,10 @@ import java.util.LinkedHashMap;
 
 public class Differ {
     public static String generate(String f1, String f2, String format) throws IOException {
-        Map<String, String> file1 = Parser.getMap(f1);
-        Map<String, String> file2 = Parser.getMap(f2);
+        String body1 = Files.readString(Path.of(f1));
+        String body2 = Files.readString(Path.of(f2));
+        Map<String, String> file1 = Parser.parse(f1, body1);
+        Map<String, String> file2 = Parser.parse(f2, body2);
         Map<String, Map<String, String>> resultMapValue = new TreeMap<>();
         Map<String, String> commonMap = new HashMap<>();
         commonMap.putAll(file1);

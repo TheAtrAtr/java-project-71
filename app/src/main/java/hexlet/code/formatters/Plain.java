@@ -22,21 +22,69 @@ public class Plain {
         keys.addAll(resultMapValue.keySet());
         for (var key : keys) {
             for (var e : resultMapValue.get(key).entrySet()) {
-                String value;
-                String valueBefore;
-                String valueAfter;
+                StringBuilder value = new StringBuilder();
+                StringBuilder valueBefore = new StringBuilder();
+                StringBuilder valueAfter = new StringBuilder();
+//                String plusMinusSpace = e.getKey();
+//                switch (plusMinusSpace) {
+//                    case (" "):
+//                        break;
+//                    case ("+"):
+//                        if (e.getValue().contains("[") || e.getValue().contains("{")) {
+//                            value.append(COMPLEX);
+//                        } else {
+//                            String v = e.getValue().replace(":", "").trim();
+//                            if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
+//                                value.append(v);
+//                            } else {
+//                                value.append("'").append(v).append("'");
+//                            }
+//                        }
+//                        builder.append("Property '").append(key).append(ADDED).append(value).append("\n");
+//                    case ("-"):
+//                        if (resultMapValue.get(key).size() > 1) {
+//                            if (resultMapValue.get(key).get("-").contains("[") || resultMapValue.get(key).get("-")
+//                                    .contains("]")) {
+//                                valueBefore.append(COMPLEX).append(" to");
+//                            } else {
+//                                String v = (resultMapValue.get(key).get("-")).replace(":", "").trim();
+//                                if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
+//                                    valueBefore.append(v).append(" to");
+//                                } else {
+//                                    valueBefore.append("'").append(v).append("' to");
+//                                }
+//                            }
+//                            if (resultMapValue.get(key).get("+").contains("[") || resultMapValue.get(key).get("+")
+//                                    .contains("]")) {
+//                                valueAfter.append(" ").append(COMPLEX);
+//                            } else {
+//                                String v = (resultMapValue.get(key).get("+")).replace(":", "").trim();
+//                                if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
+//                                    valueAfter.append(" ").append(v);
+//                                } else {
+//                                    valueAfter.append(" '").append(v).append("'");
+//                                }
+//                            }
+//                            builder.append("Property '").append(key).append(UPDATED).append(valueBefore)
+//                            .append(valueAfter)
+//                                    .append("\n");
+//                        } else if (resultMapValue.get(key).size() == 1) {
+//                            builder.append("Property '").append(key).append(REMOVED).append("\n");
+//                        }
+//                        break;
+//                }
                 if (e.getKey().equals(" ")) {
                     break;
                 } else if (e.getKey().equals("+")) {
 
                     if (e.getValue().contains("[") || e.getValue().contains("{")) {
-                        value = COMPLEX;
+                        value.append(COMPLEX);
                     } else {
                         String v = e.getValue().replace(":", "").trim();
                         if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
-                            value = v;
+                            value.append(v);
                         } else {
-                            value = "'" + v + "'";
+                            value.append("'").append(v).append("'");
                         }
                     }
                     builder.append("Property '").append(key).append(ADDED).append(value).append("\n");
@@ -44,24 +92,24 @@ public class Plain {
                     if (resultMapValue.get(key).size() > 1) {
                         if (resultMapValue.get(key).get("-").contains("[") || resultMapValue.get(key).get("-")
                                 .contains("]")) {
-                            valueBefore = COMPLEX + " to";
+                            valueBefore.append(COMPLEX).append(" to");
                         } else {
                             String v = (resultMapValue.get(key).get("-")).replace(":", "").trim();
                             if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
-                                valueBefore = v + " to";
+                                valueBefore.append(v).append(" to");
                             } else {
-                                valueBefore = "'" + v + "' to";
+                                valueBefore.append("'").append(v).append("' to");
                             }
                         }
                         if (resultMapValue.get(key).get("+").contains("[") || resultMapValue.get(key).get("+")
                                 .contains("]")) {
-                            valueAfter = " " + COMPLEX;
+                            valueAfter.append(" ").append(COMPLEX);
                         } else {
                             String v = (resultMapValue.get(key).get("+")).replace(":", "").trim();
                             if (StringUtils.isNumeric(v) || LIST_WORDS_WITHOUT_MARK.contains(v)) {
-                                valueAfter = " " + v;
+                                valueAfter.append(" ").append(v);
                             } else {
-                                valueAfter = " '" + v + "'";
+                                valueAfter.append(" '").append(v).append("'");
                             }
                         }
                         builder.append("Property '").append(key).append(UPDATED).append(valueBefore).append(valueAfter)

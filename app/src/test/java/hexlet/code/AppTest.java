@@ -75,11 +75,14 @@ public class AppTest {
 
     @Test
     public void testJsonToJson() throws IOException {
-        String diff = "{\"chars1\":\"sameValuesInBothFiles\",\"chars2\":\"updated\",\"checked\":\"updated\","
-                + "\"default\":\"updated\",\"id\":\"updated\",\"key1\":\"removed\",\"key2\":\"added\","
-                + "\"numbers1\":\"sameValuesInBothFiles\",\"numbers2\":\"updated\",\"numbers3\":\"removed\","
-                + "\"numbers4\":\"added\",\"obj1\":\"added\",\"setting1\":\"updated\",\"setting2\":\"updated\","
-                + "\"setting3\":\"updated\"}";
+        String diff = "{\"chars1\":{\" \":\": [a, b, c]\"},\"chars2\":{\"-\":\": [d, e, f]\",\"+\":\": false\"},"
+                + "\"checked\":{\"-\":\": false\",\"+\":\": true\"},\"default\":{\"-\":\": null\",\"+\":\": "
+                + "[value1, value2]\"},\"id\":{\"-\":\": 45\",\"+\":\": null\"},\"key1\":{\"-\":\": value1\"},"
+                + "\"key2\":{\"+\":\": value2\"},\"numbers1\":{\" \":\": [1, 2, 3, 4]\"},\"numbers2\":{\"-\":\": "
+                + "[2, 3, 4, 5]\",\"+\":\": [22, 33, 44, 55]\"},\"numbers3\":{\"-\":\": [3, 4, 5]\"},\"numbers4\":"
+                + "{\"+\":\": [4, 5, 6]\"},\"obj1\":{\"+\":\": {nestedKey=value, isNested=true}\"},\"setting1\":"
+                + "{\"-\":\": Some value\",\"+\":\": Another value\"},\"setting2\":{\"-\":\": 200\",\"+\":\": 300\"},"
+                + "\"setting3\":{\"-\":\": true\",\"+\":\": none\"}}";
 
         String path1 = "src/test/resources/1.json";
         File file1 = new File(path1);
@@ -133,8 +136,8 @@ public class AppTest {
 
     @Test
     public void testYmlToJson() throws IOException {
-        String diff = "{\"follow\":\"removed\",\"host\":\"sameValuesInBothFiles\",\"proxy\":\"removed\","
-                + "\"timeout\":\"updated\",\"verbose\":\"added\"}";
+        String diff = "{\"follow\":{\"-\":\": false\"},\"host\":{\" \":\": hexlet.io\"},\"proxy\":{\"-\":\": "
+                + "123.234.53.22\"},\"timeout\":{\"-\":\": 50\",\"+\":\": 20\"},\"verbose\":{\"+\":\": true\"}}";
         String path1 = "src/test/resources/1.yml";
         File file1 = new File(path1);
         String absolutePath1 = file1.getAbsolutePath();
