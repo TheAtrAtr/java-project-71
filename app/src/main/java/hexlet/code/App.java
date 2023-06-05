@@ -5,6 +5,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
@@ -38,7 +39,6 @@ class App implements Callable {
     @Override
     public Object call() throws IOException {
         System.out.println(Differ.generate(file1, file2, format));
-
         return null;
     }
 }

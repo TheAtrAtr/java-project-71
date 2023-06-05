@@ -5,10 +5,11 @@ import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
+import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    static String format(Map<String, Map<String, String>> diff, String form) throws JsonProcessingException {
+    static String format(List<Map<String, Object>> diff, String form) throws JsonProcessingException {
         switch (form) {
             case ("plain"):
                 return Plain.format(diff);

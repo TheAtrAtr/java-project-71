@@ -1,20 +1,26 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Stylish {
-    public static String format(Map<String, Map<String, String>> resultMapValue) {
-        Set<String> keys = new TreeSet<>();
-        keys.addAll(resultMapValue.keySet());
-        StringBuilder builder = new StringBuilder("{\n");
-        for (var key : keys) {
-            for (var e : resultMapValue.get(key).entrySet()) {
-                builder.append("  ").append(e.getKey()).append(" ").append(key).append(e.getValue()).append("\n");
+    public static String format(List<Map<String, Object>> resultMapValue) {
+        StringBuilder build = new StringBuilder("{");
+        for (Map<String, Object> x : resultMapValue) {
+            build.append("\n").append("  ");
+            String str = (String) x.get("type");
+            switch (str) {
+                case ("deleted") -> build.append("- ").append(x.get("key")).append(": ").append(x.get("value1"));
+                case ("added") -> build.append("+ ").append(x.get("key")).append(": ").append(x.get("value2"));
+                case ("unchanged") -> build.append("  ").append(x.get("key")).append(": ").append(x.get("value1"));
+                case ("changed") -> {
+                    build.append("- ").append(x.get("key")).append(": ").append(x.get("value1")).append("\n");
+                    build.append("  ").append("+ ").append(x.get("key")).append(": ").append(x.get("value2"));
+                }
+                default -> throw new RuntimeException("");
             }
         }
-        builder.append("}");
-        return builder.toString();
+        build.append("\n}");
+        return build.toString();
     }
 }

@@ -75,14 +75,18 @@ public class AppTest {
 
     @Test
     public void testJsonToJson() throws IOException {
-        String diff = "{\"chars1\":{\" \":\": [a, b, c]\"},\"chars2\":{\"-\":\": [d, e, f]\",\"+\":\": false\"},"
-                + "\"checked\":{\"-\":\": false\",\"+\":\": true\"},\"default\":{\"-\":\": null\",\"+\":\": "
-                + "[value1, value2]\"},\"id\":{\"-\":\": 45\",\"+\":\": null\"},\"key1\":{\"-\":\": value1\"},"
-                + "\"key2\":{\"+\":\": value2\"},\"numbers1\":{\" \":\": [1, 2, 3, 4]\"},\"numbers2\":{\"-\":\": "
-                + "[2, 3, 4, 5]\",\"+\":\": [22, 33, 44, 55]\"},\"numbers3\":{\"-\":\": [3, 4, 5]\"},\"numbers4\":"
-                + "{\"+\":\": [4, 5, 6]\"},\"obj1\":{\"+\":\": {nestedKey=value, isNested=true}\"},\"setting1\":"
-                + "{\"-\":\": Some value\",\"+\":\": Another value\"},\"setting2\":{\"-\":\": 200\",\"+\":\": 300\"},"
-                + "\"setting3\":{\"-\":\": true\",\"+\":\": none\"}}";
+        String diff = "[{\"key\":\"chars1\",\"type\":\"unchanged\",\"value1\":[\"a\",\"b\",\"c\"]},{\"key\":\"chars2"
+                + "\",\"type\":\"changed\",\"value1\":[\"d\",\"e\",\"f\"],\"value2\":false},{\"key\":\"checked\",\"type"
+                + "\":\"changed\",\"value1\":false,\"value2\":true},{\"key\":\"default\",\"type\":\"changed\",\"value1"
+                + "\":null,\"value2\":[\"value1\",\"value2\"]},{\"key\":\"id\",\"type\":\"changed\",\"value1\":45,"
+                + "\"value2\":null},{\"key\":\"key1\",\"type\":\"deleted\",\"value1\":\"value1\"},{\"key\":\"key2\","
+                + "\"type\":\"added\",\"value2\":\"value2\"},{\"key\":\"numbers1\",\"type\":\"unchanged\",\"value1\""
+                + ":[1,2,3,4]},{\"key\":\"numbers2\",\"type\":\"changed\",\"value1\":[2,3,4,5],\"value2\":[22,33,44,55]"
+                + "},{\"key\":\"numbers3\",\"type\":\"deleted\",\"value1\":[3,4,5]},{\"key\":\"numbers4\",\"type\":\""
+                + "added\",\"value2\":[4,5,6]},{\"key\":\"obj1\",\"type\":\"added\",\"value2\":{\"nestedKey\":\"value"
+                + "\",\"isNested\":true}},{\"key\":\"setting1\",\"type\":\"changed\",\"value1\":\"Some value\",\"value2"
+                + "\":\"Another value\"},{\"key\":\"setting2\",\"type\":\"changed\",\"value1\":200,\"value2\":300},{\""
+                + "key\":\"setting3\",\"type\":\"changed\",\"value1\":true,\"value2\":\"none\"}]";
 
         String path1 = "src/test/resources/1.json";
         File file1 = new File(path1);
@@ -136,8 +140,10 @@ public class AppTest {
 
     @Test
     public void testYmlToJson() throws IOException {
-        String diff = "{\"follow\":{\"-\":\": false\"},\"host\":{\" \":\": hexlet.io\"},\"proxy\":{\"-\":\": "
-                + "123.234.53.22\"},\"timeout\":{\"-\":\": 50\",\"+\":\": 20\"},\"verbose\":{\"+\":\": true\"}}";
+        String diff = "[{\"key\":\"follow\",\"type\":\"deleted\",\"value1\":false},{\"key\":\"host\",\"type\":"
+                + "\"unchanged\",\"value1\":\"hexlet.io\"},{\"key\":\"proxy\",\"type\":\"deleted\",\"value1\":\""
+                + "123.234.53.22\"},{\"key\":\"timeout\",\"type\":\"changed\",\"value1\":50,\"value2\":20},{\"key"
+                + "\":\"verbose\",\"type\":\"added\",\"value2\":true}]";
         String path1 = "src/test/resources/1.yml";
         File file1 = new File(path1);
         String absolutePath1 = file1.getAbsolutePath();
