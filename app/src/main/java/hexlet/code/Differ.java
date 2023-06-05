@@ -47,7 +47,6 @@ public class Differ {
             }
             commonList.add(diff);
         }
-        System.out.println(commonList);
         return Formatter.format(commonList, format);
     }
 
