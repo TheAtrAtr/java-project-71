@@ -10,6 +10,7 @@
 Для входных файлов поддерживаются форматы — json и yaml.
 Вывод отличий возможен в разных версиях — plain, stylish, json.
 
+```sh
 Usage: gendiff [-hV] [-f=format] filepath1 filepath2
 Compares two configuration files and shows a difference.
 filepath1         path to first file
@@ -17,3 +18,4 @@ filepath2         path to second file
 -f, --format=format   output format [default: stylish]
 -h, --help            Show this help message and exit.
 -V, --version         Print version information and exit.
+```
