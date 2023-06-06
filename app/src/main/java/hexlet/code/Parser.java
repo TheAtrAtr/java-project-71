@@ -8,17 +8,17 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Parser {
-    static Map<String, Object> parse(String fileName, String body) throws IOException {
+    static Map<String, Object> parse(String formatType, String content) throws IOException {
         ObjectMapper jsonMapper = new ObjectMapper();
         ObjectMapper yamlMapper = new YAMLMapper();
         Map<String, Object> x;
 
-        if (fileName.endsWith("json")) {
-            x = jsonMapper.readValue(body, new TypeReference<>() {
+        if (formatType.endsWith("json")) {
+            x = jsonMapper.readValue(content, new TypeReference<>() {
             });
 
         } else {
-            x = yamlMapper.readValue(body, new TypeReference<>() {
+            x = yamlMapper.readValue(content, new TypeReference<>() {
             });
         }
         return x;
