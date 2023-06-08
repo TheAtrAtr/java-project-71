@@ -12,15 +12,19 @@ public class Parser {
         ObjectMapper jsonMapper = new ObjectMapper();
         ObjectMapper yamlMapper = new YAMLMapper();
         Map<String, Object> x;
-
-        if (formatType.endsWith("json")) {
-            x = jsonMapper.readValue(content, new TypeReference<>() {
-            });
-
-        } else {
-            x = yamlMapper.readValue(content, new TypeReference<>() {
-            });
+        switch (formatType) {
+            case ("json"):
+                x = jsonMapper.readValue(content, new TypeReference<>() {
+                });
+                break;
+            case ("yml"):
+                x = yamlMapper.readValue(content, new TypeReference<>() {
+                });
+                break;
+            default:
+                throw new RuntimeException("Formatfile is not support");
         }
+
         return x;
     }
 }
